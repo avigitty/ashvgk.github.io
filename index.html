@@ -1,47 +1,71 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>ashvgk.in</title>
+<head>
+  <meta charset="utf-8">
+  <title>ashvgk.in</title>
 
-    <style>
-      body {
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        font-family: Arial, sans-serif;
-        background-color: #ffffff;
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+    }
+
+    /* Google-style blue gradient text */
+    h1 {
+      font-size: 56px;
+      font-weight: 600;
+      margin-bottom: 30px;
+      background: linear-gradient(90deg, #4285F4, #34A853);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Circular photo */
+    img {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    /* Welcome banner (Kathakali-inspired graceful reveal) */
+    .welcome {
+      margin-top: 25px;
+      font-size: 18px;
+      color: #333;
+      opacity: 0;
+      animation: welcomeMove 2.5s ease-out forwards;
+    }
+
+    @keyframes welcomeMove {
+      0% {
+        transform: translateY(20px) scale(0.95);
+        opacity: 0;
       }
-
-      h1 {
-        font-size: 48px;
-        font-weight: 500;
-        margin-bottom: 30px;
-        color: #202124;
+      60% {
+        transform: translateY(-5px) scale(1.05);
+        opacity: 1;
       }
-
-      img {
-        width: 220px;
-        height: 220px;
-        border-radius: 50%;
-        object-fit: cover;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
       }
+    }
+  </style>
+</head>
 
-      p {
-        margin-top: 20px;
-        color: #5f6368;
-        font-size: 14px;
-      }
-    </style>
-  </head>
+<body>
+  <h1>ashvgk.in</h1>
 
-  <body>
-    <h1>ashvgk.in</h1>
-    <img src="photo_ashvgk_site.jpg" alt="Avinash">
-    <p>Welcome 😄</p>
-  </body>
+  <img src="photo_ashvgk_site.jpg" alt="Avinash">
+
+  <div class="welcome">🙏 Welcome</div>
+</body>
 </html>
