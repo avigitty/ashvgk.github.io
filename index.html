@@ -8,90 +8,92 @@
   body {
     margin: 0;
     height: 100vh;
-    font-family: Arial, sans-serif;
     background: #fff;
+    font-family: Arial, sans-serif;
     overflow: hidden;
   }
 
-  .container {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
   h1 {
+    position: absolute;
+    top: 18%;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 56px;
-    margin-bottom: 30px;
     background: linear-gradient(90deg, #4285F4, #34A853);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  /* CENTER STAGE (vacated later) */
-  .stage {
-    position: relative;
+  /* Center slot */
+  .slot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
     width: 220px;
     height: 220px;
+    transform: translate(-50%, -50%);
   }
 
-  /* COIN */
+  /* Coin */
   .coin {
-    position: fixed;
+    position: absolute;
     left: 50%;
     top: 50%;
     width: 220px;
     height: 220px;
-    transform: translate(-50%, -50%);
+    transform-style: preserve-3d;
     border-radius: 50%;
     object-fit: cover;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
-    animation: coinSequence 5.5s ease-in-out forwards;
-    transform-style: preserve-3d;
+    box-shadow: 0 15px 35px rgba(0,0,0,.25);
+    animation: coinRealSpin 6s cubic-bezier(.2,.7,.3,1) forwards;
   }
 
-  @keyframes coinSequence {
-    /* 0–1s: show clearly */
+  @keyframes coinRealSpin {
+    /* show coin */
     0% {
-      transform: translate(-50%, -50%) rotateY(0deg);
+      transform: translate(-50%, -50%) rotateY(0deg) rotateX(0deg);
     }
-    18% {
-      transform: translate(-50%, -50%) rotateY(0deg);
-    }
-
-    /* spin */
-    45% {
-      transform: translate(-50%, -50%) rotateY(720deg);
+    15% {
+      transform: translate(-50%, -50%) rotateY(360deg) rotateX(0deg);
     }
 
-    /* fall to floor */
-    75% {
-      transform: translate(-50%, 40vh) rotateY(720deg);
+    /* fast stable spin */
+    35% {
+      transform: translate(-50%, -50%) rotateY(1080deg) rotateX(5deg);
     }
 
-    /* stand edge-on on floor */
+    /* wobble starts */
+    55% {
+      transform: translate(-50%, -40%) rotateY(1440deg) rotateX(25deg);
+    }
+
+    /* losing balance */
+    70% {
+      transform: translate(-50%, 10vh) rotateY(1620deg) rotateX(65deg);
+    }
+
+    /* hits floor edge-on */
     100% {
-      transform: translate(-50%, 40vh) rotateY(90deg);
+      transform: translate(-50%, 35vh) rotateY(1800deg) rotateX(90deg);
     }
   }
 
-  /* SEARCH BAR */
-  .search-container {
+  /* Search bar */
+  .search {
     position: absolute;
-    top: 260px;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, 40px);
     opacity: 0;
-    transition: all 1.2s ease-out;
+    transition: all 1.2s ease;
   }
 
-  .search-container.show {
-    top: 0;
+  .search.show {
+    transform: translate(-50%, -50%);
     opacity: 1;
   }
 
-  .search-box {
+  input {
     width: 420px;
     padding: 14px 18px;
     font-size: 16px;
@@ -100,53 +102,32 @@
     outline: none;
   }
 
-  .search-box:focus {
+  input:focus {
     box-shadow: 0 1px 6px rgba(32,33,36,.28);
     border-color: transparent;
-  }
-
-  .welcome {
-    margin-top: 25px;
-    font-size: 18px;
-    color: #333;
-    opacity: 0;
-    transition: opacity 1s ease;
   }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-  <h1>ashvgk.in</h1>
+<h1>ashvgk.in</h1>
 
-  <!-- Vacated center slot -->
-  <div class="stage">
-    <div class="search-container" id="search">
-      <form action="https://www.google.com/search" method="get">
-        <input
-          type="text"
-          name="q"
-          class="search-box"
-          placeholder="Search Google"
-          autofocus
-        >
-      </form>
-    </div>
+<div class="slot">
+  <div class="search" id="search">
+    <form action="https://www.google.com/search" method="get">
+      <input type="text" name="q" placeholder="Search Google" autofocus>
+    </form>
   </div>
-
-  <div class="welcome" id="welcome">🙏 Welcome</div>
 </div>
 
-<!-- Coin -->
-<img src="photo_ashvgk_site.jpg" alt="Avinash" class="coin">
+<img src="photo_ashvgk_site.jpg" class="coin" alt="Avinash">
 
 <script>
-  // Show search after coin hits floor
+  // show search after coin collapses
   setTimeout(() => {
     document.getElementById('search').classList.add('show');
-    document.getElementById('welcome').style.opacity = 1;
-  }, 4200);
+  }, 4800);
 </script>
 
 </body>
